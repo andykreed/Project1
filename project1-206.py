@@ -59,9 +59,26 @@ def classSizes(data):
 # Output: Return a list of tuples sorted by the number of students in that class in
 # descending order
 # [('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)]
+	numberOfSeniors = 0
+	numberOfJuniors = 0
+	numberOfSophomores = 0
+	numberOfFreshmen = 0
 
-	pass
+	for student in data:
+		if student['Class'] == 'Senior':
+			numberOfSeniors += 1
+		elif student['Class'] == 'Junior':
+			numberOfJuniors += 1
+		elif student['Class'] == 'Sophomore':
+			numberOfSophomores += 1
+		elif student['Class'] == 'Freshman':
+			numberOfFreshmen += 1
+		else:
+			print("ERROR IN CLASSSIZES")
+	classSizes = [('Senior', numberOfSeniors),('Junior',numberOfJuniors),
+	('Sophomore',numberOfSophomores),('Freshman',numberOfFreshmen)]
 
+	return sorted(classSizes,key=lambda classSizes: classSizes[1], reverse=True)
 
 def findMonth(a):
 # Find the most common birth month form this data
@@ -126,10 +143,10 @@ def main():
 	total += test(mySort(data,'Email'),'Hope Craft',25)
 	total += test(mySort(data2,'Email'),'Orli Humphrey',25)
 
-	# print("\nEach grade ordered by size:")
-	# total += test(classSizes(data),[('Junior', 28), ('Senior', 27), ('Freshman', 23), ('Sophomore', 22)],25)
-	# total += test(classSizes(data2),[('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)],25)
-	#
+	print("\nEach grade ordered by size:")
+	total += test(classSizes(data),[('Junior', 28), ('Senior', 27), ('Freshman', 23), ('Sophomore', 22)],25)
+	total += test(classSizes(data2),[('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)],25)
+
 	# print("\nThe most common month of the year to be born is:")
 	# total += test(findMonth(data),3,15)
 	# total += test(findMonth(data2),3,15)
