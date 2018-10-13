@@ -84,8 +84,51 @@ def findMonth(a):
 # Find the most common birth month form this data
 # Input: list of dictionaries
 # Output: Return the month (1-12) that had the most births in the data
+	d = {'1':0,
+		 '2':0,
+		 '3':0,
+		 '4':0,
+		 '5':0,
+		 '6':0,
+		 '7':0,
+		 '8':0,
+		 '9':0,
+		 '10':0,
+		 '11':0,
+		 '12':0}
 
-	pass
+	for student in a:
+		date = a[i]["DOB"].split('/')
+		month = date[0]
+
+		if month == 1:
+			d['1'] += 1
+		elif month ==2:
+			d['2'] += 1
+		elif month ==3:
+			d['3'] += 1
+		elif month ==4:
+			d['4'] += 1
+		elif month ==5:
+			d['5'] += 1
+		elif month ==6:
+			d['6'] += 1
+		elif month ==7:
+			d['7'] += 1
+		elif month ==8:
+			d['8'] += 1
+		elif month ==9:
+			d['9'] += 1
+		elif month ==10:
+			d['10'] += 1
+		elif month ==11:
+			d['11'] += 1
+		elif month ==12:
+			d['12'] += 1
+		else:
+			print("FINDMONTH ERROR")
+
+	return max(d,key=d.get)
 
 def mySortPrint(a,col,fileName):
 #Similar to mySort, but instead of returning single
@@ -147,9 +190,9 @@ def main():
 	total += test(classSizes(data),[('Junior', 28), ('Senior', 27), ('Freshman', 23), ('Sophomore', 22)],25)
 	total += test(classSizes(data2),[('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)],25)
 
-	# print("\nThe most common month of the year to be born is:")
-	# total += test(findMonth(data),3,15)
-	# total += test(findMonth(data2),3,15)
+	print("\nThe most common month of the year to be born is:")
+	total += test(findMonth(data),3,15)
+	total += test(findMonth(data2),3,15)
 	#
 	# print("\nSuccessful sort and print to file:")
 	# mySortPrint(data,'Last','results.csv')
