@@ -31,11 +31,11 @@ def getData(file):
 		d = {}
 
 		#Create value-key pairs
-		d[h1[0]] = l1[0]
-		d[h1[1]] = l1[1]
-		d[h1[2]] = l1[2]
-		d[h1[3]] = l1[3]
-		d[h1[4].strip()] = l1[4].strip()
+		d[h1[0]] = l1[0] #'First'
+		d[h1[1]] = l1[1] #'Last'
+		d[h1[2]] = l1[2] #'Email'
+		d[h1[3]] = l1[3] #'Class'
+		d[h1[4].strip()] = l1[4].strip() #'DOB'
 
 		#Add dictionary object to list and read next line
 		lst.append(d)
@@ -49,8 +49,8 @@ def mySort(data,col):
 # Sort based on key/column
 #Input: list of dictionaries and col (key) to sort on
 #Output: Return the first item in the sorted list as a string of just: firstName lastName
-
-	pass
+	data.sort(key=lambda d: d[col])
+	return str(data[0]["First"] + " " + data[0]["Last"])
 
 
 def classSizes(data):
@@ -113,19 +113,19 @@ def main():
 	data2 = getData('P1DataB.csv')
 	total += test(type(data),type([]),50)
 
-	# print()
-	# print("First student sorted by First name:")
-	# total += test(mySort(data,'First'),'Abbot Le',25)
-	# total += test(mySort(data2,'First'),'Adam Rocha',25)
-	#
-	# print("First student sorted by Last name:")
-	# total += test(mySort(data,'Last'),'Elijah Adams',25)
-	# total += test(mySort(data2,'Last'),'Elijah Adams',25)
-	#
-	# print("First student sorted by Email:")
-	# total += test(mySort(data,'Email'),'Hope Craft',25)
-	# total += test(mySort(data2,'Email'),'Orli Humphrey',25)
-	#
+	print()
+	print("First student sorted by First name:")
+	total += test(mySort(data,'First'),'Abbot Le',25)
+	total += test(mySort(data2,'First'),'Adam Rocha',25)
+
+	print("First student sorted by Last name:")
+	total += test(mySort(data,'Last'),'Elijah Adams',25)
+	total += test(mySort(data2,'Last'),'Elijah Adams',25)
+
+	print("First student sorted by Email:")
+	total += test(mySort(data,'Email'),'Hope Craft',25)
+	total += test(mySort(data2,'Email'),'Orli Humphrey',25)
+
 	# print("\nEach grade ordered by size:")
 	# total += test(classSizes(data),[('Junior', 28), ('Senior', 27), ('Freshman', 23), ('Sophomore', 22)],25)
 	# total += test(classSizes(data2),[('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)],25)
