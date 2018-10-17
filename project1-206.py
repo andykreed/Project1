@@ -153,8 +153,26 @@ def findAge(a):
 # Output: Return the average age of the students and round that age to the nearest
 # integer.  You will need to work with the DOB and the current date to find the current
 # age in years.
+	totalAge = 0
+	count = 0
+	for student in a:
+		datestring = student["DOB"].split("/")
 
-	pass
+		dt = date(int(datestring[2]), int(datestring[0]), int(datestring[1]))
+
+
+		age = dt.today() - dt
+	
+
+		count += 1
+		totalAge += age.total_seconds()
+
+
+	totalAgeYears = totalAge / 60 / 60 / 24 / 365.25
+
+	avgAge = totalAgeYears / count
+	print(avgAge)
+	return(round(avgAge))
 
 
 ################################################################
@@ -178,7 +196,7 @@ def main():
 	total = 0
 	print("Read in Test data and store as a list of dictionaries")
 	data = getData('P1DataA.csv')
-	data2 = getData('P1DataB.csv')
+	data2 = getData('P1DataB2.csv')
 	total += test(type(data),type([]),50)
 
 	print()
@@ -202,15 +220,15 @@ def main():
 	# total += test(findMonth(data),3,15)
 	# total += test(findMonth(data2),3,15)
 	#
-	print("\nSuccessful sort and print to file:")
-	mySortPrint(data,'Last','results.csv')
-	if os.path.exists('results.csv'):
-		total += test(filecmp.cmp('outfile.csv', 'results.csv'),True,20)
+	# print("\nSuccessful sort and print to file:")
+	# mySortPrint(data,'Last','results.csv')
+	# if os.path.exists('results.csv'):
+	# 	total += test(filecmp.cmp('outfile.csv', 'results.csv'),True,20)
 	#
-	# print("\nTest of extra credit: Calcuate average age")
-	# total += test(findAge(data), 40, 5)
-	# total += test(findAge(data2), 42, 5)
-	#
+	print("\nTest of extra credit: Calcuate average age")
+	total += test(findAge(data), 40, 5)
+	total += test(findAge(data2), 42, 5)
+
 	# print("Your final score is " + str(total))
 
 # Standard boilerplate to call the main() function that tests all your code
