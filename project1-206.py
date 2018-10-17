@@ -31,11 +31,11 @@ def getData(file):
 		d = {}
 
 		#Create value-key pairs
-		d[h1[0]] = l1[0] #'First'
-		d[h1[1]] = l1[1] #'Last'
-		d[h1[2]] = l1[2] #'Email'
-		d[h1[3]] = l1[3] #'Class'
-		d[h1[4].strip()] = l1[4].strip() #'DOB'
+		first = d[h1[0]] = l1[0] #'First'
+		last = d[h1[1]] = l1[1] #'Last'
+		email = d[h1[2]] = l1[2] #'Email'
+		class_ = d[h1[3]] = l1[3] #'Class'
+		dob = d[h1[4].strip()] = l1[4].strip() #'DOB'
 
 		#Add dictionary object to list and read next line
 		lst.append(d)
@@ -137,7 +137,15 @@ def mySortPrint(a,col,fileName):
 #Input: list of dictionaries, col (key) to sort by and output file name
 #Output: No return value, but the file is written
 
-	pass
+	a.sort(key=lambda d: d["First"]) #THIS IS HARDCODED
+	a.sort(key=lambda d: d[col])
+
+	outFile = open(fileName,'w')
+
+	for student in a:
+		outFile.write(student["First"] + "," + student["Last"] + "," + student["Email"] + "\n")
+
+	outFile.close()
 
 def findAge(a):
 # def findAge(a):
@@ -190,14 +198,14 @@ def main():
 	total += test(classSizes(data),[('Junior', 28), ('Senior', 27), ('Freshman', 23), ('Sophomore', 22)],25)
 	total += test(classSizes(data2),[('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)],25)
 
-	print("\nThe most common month of the year to be born is:")
-	total += test(findMonth(data),3,15)
-	total += test(findMonth(data2),3,15)
+	# print("\nThe most common month of the year to be born is:")
+	# total += test(findMonth(data),3,15)
+	# total += test(findMonth(data2),3,15)
 	#
-	# print("\nSuccessful sort and print to file:")
-	# mySortPrint(data,'Last','results.csv')
-	# if os.path.exists('results.csv'):
-	# 	total += test(filecmp.cmp('outfile.csv', 'results.csv'),True,20)
+	print("\nSuccessful sort and print to file:")
+	mySortPrint(data,'Last','results.csv')
+	if os.path.exists('results.csv'):
+		total += test(filecmp.cmp('outfile.csv', 'results.csv'),True,20)
 	#
 	# print("\nTest of extra credit: Calcuate average age")
 	# total += test(findAge(data), 40, 5)
