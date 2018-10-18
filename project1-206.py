@@ -98,32 +98,32 @@ def findMonth(a):
 		 '12':0}
 
 	for student in a:
-		date = a[i]["DOB"].split('/')
-		month = date[0]
+		date = student["DOB"].split('/')
+		month = int(date[0])
 
 		if month == 1:
 			d['1'] += 1
-		elif month ==2:
+		elif month == 2:
 			d['2'] += 1
-		elif month ==3:
+		elif month == 3:
 			d['3'] += 1
-		elif month ==4:
+		elif month == 4:
 			d['4'] += 1
-		elif month ==5:
+		elif month == 5:
 			d['5'] += 1
-		elif month ==6:
+		elif month == 6:
 			d['6'] += 1
-		elif month ==7:
+		elif month == 7:
 			d['7'] += 1
-		elif month ==8:
+		elif month == 8:
 			d['8'] += 1
-		elif month ==9:
+		elif month == 9:
 			d['9'] += 1
-		elif month ==10:
+		elif month == 10:
 			d['10'] += 1
-		elif month ==11:
+		elif month == 11:
 			d['11'] += 1
-		elif month ==12:
+		elif month == 12:
 			d['12'] += 1
 		else:
 			print("FINDMONTH ERROR")
@@ -162,7 +162,7 @@ def findAge(a):
 
 
 		age = dt.today() - dt
-	
+
 
 		count += 1
 		totalAge += age.total_seconds()
@@ -216,18 +216,18 @@ def main():
 	total += test(classSizes(data),[('Junior', 28), ('Senior', 27), ('Freshman', 23), ('Sophomore', 22)],25)
 	total += test(classSizes(data2),[('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)],25)
 
-	# print("\nThe most common month of the year to be born is:")
-	# total += test(findMonth(data),3,15)
-	# total += test(findMonth(data2),3,15)
-	#
+	print("\nThe most common month of the year to be born is:")
+	total += test(findMonth(data),3,15)
+	total += test(findMonth(data2),3,15)
+
 	# print("\nSuccessful sort and print to file:")
 	# mySortPrint(data,'Last','results.csv')
 	# if os.path.exists('results.csv'):
 	# 	total += test(filecmp.cmp('outfile.csv', 'results.csv'),True,20)
 	#
-	print("\nTest of extra credit: Calcuate average age")
-	total += test(findAge(data), 40, 5)
-	total += test(findAge(data2), 42, 5)
+	# print("\nTest of extra credit: Calcuate average age")
+	# total += test(findAge(data), 40, 5)
+	# total += test(findAge(data2), 42, 5)
 
 	# print("Your final score is " + str(total))
 
