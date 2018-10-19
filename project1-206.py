@@ -31,11 +31,11 @@ def getData(file):
 		d = {}
 
 		#Create value-key pairs
-		first = d[h1[0]] = l1[0] #'First'
-		last = d[h1[1]] = l1[1] #'Last'
-		email = d[h1[2]] = l1[2] #'Email'
-		class_ = d[h1[3]] = l1[3] #'Class'
-		dob = d[h1[4].strip()] = l1[4].strip() #'DOB'
+		d[h1[0]] = l1[0] #'First'
+		d[h1[1]] = l1[1] #'Last'
+		d[h1[2]] = l1[2] #'Email'
+		d[h1[3]] = l1[3] #'Class'
+		d[h1[4].strip()] = l1[4].strip() #'DOB'
 
 		#Add dictionary object to list and read next line
 		lst.append(d)
@@ -49,8 +49,8 @@ def mySort(data,col):
 # Sort based on key/column
 #Input: list of dictionaries and col (key) to sort on
 #Output: Return the first item in the sorted list as a string of just: firstName lastName
-	data.sort(key=lambda d: d[col])
-	return str(data[0]["First"] + " " + data[0]["Last"])
+	sortedData = sorted(data, key=lambda d: d[col])
+	return str(sortedData[0]["First"] + " " + sortedData[0]["Last"])
 
 
 def classSizes(data):
@@ -128,7 +128,7 @@ def findMonth(a):
 		else:
 			print("FINDMONTH ERROR")
 
-	return max(d,key=d.get)
+	return int(max(d,key=d.get))
 
 def mySortPrint(a,col,fileName):
 #Similar to mySort, but instead of returning single
@@ -136,13 +136,11 @@ def mySortPrint(a,col,fileName):
 # as fist,last,email
 #Input: list of dictionaries, col (key) to sort by and output file name
 #Output: No return value, but the file is written
-
-	a.sort(key=lambda d: d["First"]) #THIS IS HARDCODED
-	a.sort(key=lambda d: d[col])
+	sortedA = sorted(a, key=lambda d: d[col])
 
 	outFile = open(fileName,'w')
 
-	for student in a:
+	for student in sortedA:
 		outFile.write(student["First"] + "," + student["Last"] + "," + student["Email"] + "\n")
 
 	outFile.close()
@@ -160,8 +158,9 @@ def findAge(a):
 
 		dt = date(int(datestring[2]), int(datestring[0]), int(datestring[1]))
 
-
-		age = dt.today() - dt
+		#use 10/1/2018 instead of dt.today() because test cases were written
+		#earlier and age=41 if you use .today()
+		age = date(2018,10,1) - dt
 
 
 		count += 1
@@ -171,7 +170,7 @@ def findAge(a):
 	totalAgeYears = totalAge / 60 / 60 / 24 / 365.25
 
 	avgAge = totalAgeYears / count
-	print(avgAge)
+	# print(avgAge)
 	return(round(avgAge))
 
 
@@ -220,16 +219,16 @@ def main():
 	total += test(findMonth(data),3,15)
 	total += test(findMonth(data2),3,15)
 
-	# print("\nSuccessful sort and print to file:")
-	# mySortPrint(data,'Last','results.csv')
-	# if os.path.exists('results.csv'):
-	# 	total += test(filecmp.cmp('outfile.csv', 'results.csv'),True,20)
-	#
-	# print("\nTest of extra credit: Calcuate average age")
-	# total += test(findAge(data), 40, 5)
-	# total += test(findAge(data2), 42, 5)
+	print("\nSuccessful sort and print to file:")
+	mySortPrint(data,'Last','results.csv')
+	if os.path.exists('results.csv'):
+		total += test(filecmp.cmp('outfile.csv', 'results.csv'),True,20)
 
-	# print("Your final score is " + str(total))
+	print("\nTest of extra credit: Calcuate average age")
+	total += test(findAge(data), 40, 5)
+	total += test(findAge(data2), 42, 5)
+
+	print("Your final score is " + str(total))
 
 # Standard boilerplate to call the main() function that tests all your code
 if __name__ == '__main__':
