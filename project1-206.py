@@ -160,14 +160,15 @@ def findAge(a):
 
 		#use 10/1/2018 instead of dt.today() because test cases were written
 		#earlier and age=41 if you use .today()
-		age = date(2018,10,1) - dt
+		age = date.today() - dt
+		# print(age)
 
 
 		count += 1
 		totalAge += age.total_seconds()
 
 
-	totalAgeYears = totalAge / 60 / 60 / 24 / 365.25
+	totalAgeYears = totalAge / 60 / 60 / 24 / 365
 
 	avgAge = totalAgeYears / count
 	# print(avgAge)
