@@ -136,10 +136,12 @@ def mySortPrint(a,col,fileName):
 # as fist,last,email
 #Input: list of dictionaries, col (key) to sort by and output file name
 #Output: No return value, but the file is written
+	#Create new sorted list
 	sortedA = sorted(a, key=lambda d: d[col])
 
 	outFile = open(fileName,'w')
 
+	#Write the first & last name of each line as well as email
 	for student in sortedA:
 		outFile.write(student["First"] + "," + student["Last"] + "," + student["Email"] + "\n")
 
@@ -153,26 +155,29 @@ def findAge(a):
 # age in years.
 	totalAge = 0
 	count = 0
+
 	for student in a:
+		#Split DOB value on "/" to isolate day, month, and year of DOB
 		datestring = student["DOB"].split("/")
 
+		#Create date data structure in yyyy/mm/dd format
 		dt = date(int(datestring[2]), int(datestring[0]), int(datestring[1]))
-		# print(dt)
-		#use 10/1/2018 instead of dt.today() because test cases were written
-		#earlier and age=41 if you use .today()
+
+		#Subtract each date from today's date to calculate age in days
 		age = date.today() - dt
-		# print(age)
+
 
 
 		count += 1
+		#Age is only taking into account whole number years and not extra days
+		#Therefore we need to round down the number of years using int()
 		AgeInYears = int(age.total_seconds() / 60 / 60 / 24 / 365.25)
 		totalAge += AgeInYears
 
 
 
-
+	#calculate average age, round, and print
 	avgAge = totalAge/ count
-	print(avgAge)
 	return(round(avgAge))
 
 
