@@ -157,7 +157,7 @@ def findAge(a):
 		datestring = student["DOB"].split("/")
 
 		dt = date(int(datestring[2]), int(datestring[0]), int(datestring[1]))
-
+		# print(dt)
 		#use 10/1/2018 instead of dt.today() because test cases were written
 		#earlier and age=41 if you use .today()
 		age = date.today() - dt
@@ -165,13 +165,14 @@ def findAge(a):
 
 
 		count += 1
-		totalAge += age.total_seconds()
+		AgeInYears = int(age.total_seconds() / 60 / 60 / 24 / 365.25)
+		totalAge += AgeInYears
 
 
-	totalAgeYears = totalAge / 60 / 60 / 24 / 365
 
-	avgAge = totalAgeYears / count
-	# print(avgAge)
+
+	avgAge = totalAge/ count
+	print(avgAge)
 	return(round(avgAge))
 
 
